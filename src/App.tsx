@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MitraPage from "./pages/mitra/MitraPage";
 import AdminPanelPage from "./pages/admin/AdminPanelPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import AdminRouteGuard from "./components/admin/AdminRouteGuard";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +22,15 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/mitra" element={<MitraPage />} />
-          <Route path="/admin" element={<AdminPanelPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route
+            path="/admin"
+            element={(
+              <AdminRouteGuard>
+                <AdminPanelPage />
+              </AdminRouteGuard>
+            )}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
